@@ -1,0 +1,41 @@
+name: Build and push image to google container registry for go app
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  IMAGE: go-app
+  TAG: ${{ github.event.release.tag_name }}
+on:
+  release:
+    types: [created]
+jobs:
+  backend:
+    name: Setup, Build, Publish backend & grafana
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Get Tag
+      run: |
+        echo "TAG=$(echo $TAG | sed -e 's/^v//')" >> $GITHUB_ENV
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        project_id: ${{ secrets.GKE_PROJECT }}
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    - run: |-
+        gcloud --quiet auth configure-docker
+
+    # Build the Backend Docker image
+    - name: Build Go App
+      run: |-
+        docker build \
+          --tag "gcr.io/$PROJECT_ID/$IMAGE_BACKEND:${{env.TAG}}" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          .
+    # Push the Docker images to Google Container Registry
+    - name: Publish images to google container registry
+      run: |-
+        docker push "gcr.io/$PROJECT_ID/$IMAGE_BACKEND:${{env.TAG}}"

@@ -1,0 +1,44 @@
+# App Development
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-go-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-go-app
+  template:
+    metadata:
+      labels:
+        app: my-go-app
+    spec:
+      containers:
+        - name: go-app-container
+          image: localhost:5000/my-go-app:0.1.0
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000 #Should match the port number that the Go application listens
+
+---
+
+# App Service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-go-app
+  labels:
+    app: my-go-app
+spec:
+    type: NodePort
+    ports:
+      - port: 80
+        targetPort: 3000 #should match the port which app is listening
+    selector:
+      app: my-go-app
