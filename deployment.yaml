@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: go-app-container
-          image: gcr.io/github-insights-73848/go-app:0.0.5 #localhost:5000/my-go-app:0.1.0
+          image: gcr.io/github-insights-73848/go-app:0.0.6 #localhost:5000/my-go-app:0.1.0
           imagePullPolicy: IfNotPresent
           resources:
             limits:
@@ -24,21 +24,3 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 3000 #Should match the port number that the Go application listens
-
----
-
-# App Service
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: my-go-app
-  labels:
-    app: my-go-app
-spec:
-    type: NodePort
-    ports:
-      - port: 80
-        targetPort: 3000 #should match the port which app is listening
-    selector:
-      app: my-go-app
