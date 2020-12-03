@@ -27,15 +27,15 @@ jobs:
     - run: |-
         gcloud --quiet auth configure-docker
 
-    # Build the Backend Docker image
+    # Build the Go App Docker image
     - name: Build Go App
       run: |-
         docker build \
-          --tag "gcr.io/$PROJECT_ID/$IMAGE_BACKEND:${{env.TAG}}" \
+          --tag "gcr.io/$PROJECT_ID/$IMAGE:${{env.TAG}}" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
     # Push the Docker images to Google Container Registry
     - name: Publish images to google container registry
       run: |-
-        docker push "gcr.io/$PROJECT_ID/$IMAGE_BACKEND:${{env.TAG}}"
+        docker push "gcr.io/$PROJECT_ID/$IMAGE:${{env.TAG}}"
