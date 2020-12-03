@@ -2,7 +2,7 @@ name: Deploy images to GKE
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  TAG: 0.0.4
+  TAG: 0.0.5
   $IMAGE: go-app
   GKE_CLUSTER: dpe-insights-extractor
   GKE_ZONE: us-central1-c
