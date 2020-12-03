@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: go-app-container
-          image: localhost:5000/my-go-app:0.1.0
+          image: gcr.io/github-insights-73848/go-app:0.0.3 #localhost:5000/my-go-app:0.1.0
           imagePullPolicy: IfNotPresent
           resources:
             limits:
