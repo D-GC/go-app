@@ -4,3 +4,7 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
+images:
+- name: gcr.io/PROJECT_ID/IMAGE:TAG
+  newName: gcr.io/github-insights-73848/go-app
+  newTag: 0.0.7
