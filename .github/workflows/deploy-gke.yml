@@ -5,7 +5,7 @@ env:
   $IMAGE: go-app
   GKE_CLUSTER: dpe-insights-extractor
   GKE_ZONE: us-central1-c
-  DEPLOYMENT_NAME: go-app
+  DEPLOYMENT_NAME: my-go-app
 on:
   workflow_dispatch:
     inputs:
