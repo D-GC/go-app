@@ -2,7 +2,6 @@ name: Deploy images to GKE
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  TAG: 0.0.6
   $IMAGE: go-app
   GKE_CLUSTER: dpe-insights-extractor
   GKE_ZONE: us-central1-c
@@ -47,6 +46,8 @@ jobs:
         kubectl version
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
+      env:
+        TAG: ${{ github.event.inputs.tag }}
       run: |
         kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$TAG
         kustomize build . | kubectl apply -f -
