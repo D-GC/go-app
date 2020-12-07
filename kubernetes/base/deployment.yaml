@@ -17,7 +17,7 @@ spec:
       containers:
         - name: my-go-app-container
           image: gcr.io/github-insights-73848/go-app:0.0.1
-          imagePullPolicy: always
+          imagePullPolicy: Always
           resources:
             limits:
               memory: "128Mi"
