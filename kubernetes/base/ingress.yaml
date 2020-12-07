@@ -11,5 +11,5 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: my-go-app
+          serviceName: my-go-app-service
           servicePort: 80
