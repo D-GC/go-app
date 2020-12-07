@@ -32,7 +32,7 @@ jobs:
     - name: Set up Kustomize
       run: |-
         curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
-        mv kustomize /usr/local/bin/
+        sudo mv kustomize /usr/local/bin/
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       env:
