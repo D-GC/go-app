@@ -1,0 +1,14 @@
+# App Service using LoadBalancer
+# To use this service, use this file instead of service.yaml in kustomization.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-go-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: my-go-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000

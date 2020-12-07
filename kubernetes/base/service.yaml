@@ -1,17 +1,9 @@
-# App Service
-#https://kubernetes.io/docs/concepts/services-networking/service/
+# App Service using NodePort
+
 apiVersion: v1
 kind: Service
 metadata:
   name: my-go-app
-#spec:
-#  type: LoadBalancer
-#  selector:
-#    app: my-go-app
-#  ports:
-#  - protocol: TCP
-#    port: 80
-#    targetPort: 3000
 spec:
   type: NodePort
   selector:
