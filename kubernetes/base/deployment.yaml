@@ -17,10 +17,10 @@ spec:
       containers:
         - name: my-go-app-container
           image: gcr.io/github-insights-73848/my-go-app:0.0.1
-          imagePullPolicy: Always
-          resources:
-            limits:
-              memory: "128Mi"
-              cpu: "500m"
+          imagePullPolicy: IfNotPresent
+#          resources:
+#            limits:
+#              memory: "128Mi"
+#              cpu: "500m"
           ports:
             - containerPort: 3000 #Should match the port number that the Go application listens
