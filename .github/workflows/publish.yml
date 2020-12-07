@@ -2,7 +2,7 @@ name: Build and push image to google container registry for go app
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  IMAGE: go-app
+  IMAGE: my-go-app
   TAG: ${{ github.event.release.tag_name }}
 on:
   release:
