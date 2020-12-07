@@ -20,7 +20,7 @@ spec:
           imagePullPolicy: Always
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: "1Gi"
+              cpu: "1"
           ports:
             - containerPort: 3000 #Should match the port number that the Go application listens
