@@ -20,7 +20,6 @@ jobs:
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@master
       with:
-        project_id: ${{ secrets.GKE_PROJECT }}
         service_account_key: ${{ secrets.GKE_DEPLOY_SA_KEY }} #GKE_SA_KEY
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
