@@ -37,8 +37,11 @@ jobs:
     - name: Deploy
       env:
         TAG: ${{ github.event.inputs.tag }}
+        DEPLOYMENT_DIR: ./kubernetes/overlays/production/
       run: |
-        $(cd ./kubernetes/overlays/production && kustomize edit set image gcr.io/$PROJECT_ID/$IMAGE:$TAG)
-        kustomize build ./kubernetes/overlays/production/ | kubectl apply -f -
+        $(cd $DEPLOYMENT_DIR && 
+        kustomize edit set image gcr.io/$PROJECT_ID/$IMAGE:$TAG &&
+        kustomize edit add secret go-app --from-literal=test-secret=test)
+        kustomize build $DEPLOYMENT_DIR | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
