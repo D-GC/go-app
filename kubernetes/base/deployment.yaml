@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: my-go-app-container
-          image: gcr.io/github-insights-73848/my-go-app/app:0.0.1
+          image: gcr.io/platform-production-299016/my-go-app/app:0.0.1
           imagePullPolicy: IfNotPresent
 #          resources:
 #            limits:
