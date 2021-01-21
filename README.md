@@ -1,3 +1,3 @@
 # Deploying a containerized Go app on Kubernetes
-2
+3
 **TODO**
