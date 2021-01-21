@@ -4,9 +4,11 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   IMAGE: "my-go-app/app"
   TAG: ${{ github.event.release.tag_name }}
+  SERVICE_ACCOUNT_KEY:  ${{ secrets.GKE_DEPLOY_SA_KEY }}
 on:
   release:
     types: [created]
+  push:  
 jobs:
   backend:
     name: Setup, Build, Publish backend & grafana
@@ -21,7 +23,7 @@ jobs:
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@master
       with:
-        service_account_key: ${{ secrets.GKE_DEPLOY_SA_KEY }} #GKE_SA_KEY
+        service_account_key: ${{ env.SERVICE_ACCOUNT_KEY}}
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
     - run: |-
