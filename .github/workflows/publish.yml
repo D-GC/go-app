@@ -43,6 +43,6 @@ jobs:
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
     # Push the Docker images to Google Container Registry
-    - name: Publish images to google container registry
-      run: |-
-        docker push "gcr.io/$PROJECT_ID/$IMAGE:${{env.TAG}}"
+#    - name: Publish images to google container registry
+#      run: |-
+#        docker push "gcr.io/$PROJECT_ID/$IMAGE:${{env.TAG}}"
