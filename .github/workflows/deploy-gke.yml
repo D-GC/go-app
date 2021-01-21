@@ -15,7 +15,7 @@ on:
 jobs:
   deploy:
     name: deploy images
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
@@ -39,7 +39,7 @@ jobs:
         TAG: ${{ github.event.inputs.tag }}
         DEPLOYMENT_DIR: ./kubernetes/overlays/production/
       run: |
-        $(cd $DEPLOYMENT_DIR && 
+        $(cd $DEPLOYMENT_DIR &&
         kustomize edit set image gcr.io/$PROJECT_ID/$IMAGE:$TAG &&
         kustomize edit add secret go-app --from-literal=test-secret=test)
         kustomize build $DEPLOYMENT_DIR | kubectl apply -f -

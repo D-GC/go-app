@@ -10,11 +10,12 @@ on:
 jobs:
   backend:
     name: Setup, Build, Publish backend & grafana
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Get Tag
+      if: ${{ !env.ACT }}
       run: |
         echo "TAG=$(echo $TAG | sed -e 's/^v//')" >> $GITHUB_ENV
     - name: Set up Cloud SDK

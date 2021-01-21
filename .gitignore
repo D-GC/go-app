@@ -1,2 +1,4 @@
 .DS_Store
 .idea
+act.env
+local-secrets.env
