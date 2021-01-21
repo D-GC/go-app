@@ -10,7 +10,7 @@ on:
   push:
 jobs:
   backend:
-    name: Setup, Build, Publish backend & grafana
+    name: Setup, Build, Publish go app
     runs-on: ubuntu-18.04
     steps:
     - name: Checkout
@@ -25,10 +25,10 @@ jobs:
       if: ${{ !env.ACT }}
       run: |
         echo "TAG=$(echo $TAG | sed -e 's/^v//')" >> $GITHUB_ENV
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
-      with:
-        service_account_key: ${{ secrets.GKE_DEPLOY_SA_KEY }}
+#    - name: Set up Cloud SDK
+#      uses: google-github-actions/setup-gcloud@master
+#      with:
+#        service_account_key: ${{ secrets.GKE_DEPLOY_SA_KEY }}
     # Configure Docker to use the gcloud command-line tool as a credential
     # helper for authentication
     - run: |-
