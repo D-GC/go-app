@@ -8,6 +8,7 @@ env:
 on:
   release:
     types: [created]
+  push:
 jobs:
   backend:
     name: Setup, Build, Publish backend & grafana
