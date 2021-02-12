@@ -25,14 +25,14 @@ jobs:
       if: ${{ !env.ACT }}
       run: |
         echo "TAG=$(echo $TAG | sed -e 's/^v//')" >> $GITHUB_ENV
-#    - name: Set up Cloud SDK
-#      uses: google-github-actions/setup-gcloud@master
-#      with:
-#        service_account_key: ${{ secrets.GKE_DEPLOY_SA_KEY }}
-    # Configure Docker to use the gcloud command-line tool as a credential
-    # helper for authentication
-#    - run: |-
-#        gcloud --quiet auth configure-docker
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.GKE_DEPLOY_SA_KEY }}
+     Configure Docker to use the gcloud command-line tool as a credential
+     helper for authentication
+    - run: |-
+        gcloud --quiet auth configure-docker
 
     # Build the Go App Docker image
     - name: Build Go App
@@ -43,6 +43,6 @@ jobs:
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
     # Push the Docker images to Google Container Registry
-#    - name: Publish images to google container registry
-#      run: |-
-#        docker push "gcr.io/$PROJECT_ID/$IMAGE:${{env.TAG}}"
+    - name: Publish images to google container registry
+      run: |-
+        docker push "gcr.io/$PROJECT_ID/$IMAGE:${{env.TAG}}"
