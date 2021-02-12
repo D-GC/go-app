@@ -20,7 +20,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-  - name: Configure GKE
+    - name: Configure GKE
       uses: sendinblue/gke-login-action@main
       with:
         gcp-project-id: ${{ env.PROJECT_ID }}
