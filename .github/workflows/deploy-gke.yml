@@ -19,15 +19,26 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@master
-      with:
-        project_id: ${{ secrets.GKE_PROJECT }}
-        service_account_key: ${{ secrets.GKE_DEPLOY_SA_KEY }}
 
-    # Get the GKE credentials so we can deploy to the cluster
-    - run: |-
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+  - name: Configure GKE
+      uses: sendinblue/gke-login-action@main
+      with:
+        gcp-project-id: ${{ env.PROJECT_ID }}
+        gcp-service-account-key: ${{ secrets.GKE_DEPLOY_SA_KEY }}
+        gke-cluster: ${{ env.GKE_CLUSTER }}
+        gke-zone: ${{ env.GKE_ZONE }}
+
+#    - name: Set up Cloud SDK
+#      uses: google-github-actions/setup-gcloud@master
+#      with:
+#        project_id: ${{ secrets.GKE_PROJECT }}
+#        service_account_key: ${{ secrets.GKE_DEPLOY_SA_KEY }}
+#
+#    # Get the GKE credentials so we can deploy to the cluster
+#    - run: |-
+#        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+
+
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       env:
@@ -40,4 +51,4 @@ jobs:
         kustomize build $DEPLOYMENT_DIR | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
-        
+
