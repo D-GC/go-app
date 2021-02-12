@@ -29,8 +29,7 @@ jobs:
       uses: google-github-actions/setup-gcloud@master
       with:
         service_account_key: ${{ secrets.GKE_DEPLOY_SA_KEY }}
-     Configure Docker to use the gcloud command-line tool as a credential
-     helper for authentication
+    # Configure Docker to use the gcloud command-line tool as a credential helper for authentication
     - run: |-
         gcloud --quiet auth configure-docker
 
