@@ -3,7 +3,7 @@ name: Build and push image to google container registry for go app
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   IMAGE: "my-go-app/app"
-  TAG: "latest" #${{ github.event.release.tag_name }}
+  TAG: ${{ github.event.release.tag_name }} #"latest"
 on:
   release:
     types: [created]
@@ -22,7 +22,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-go-
     - name: Get Tag
-      if: ${{ !env.ACT }}
+      #if: ${{ !env.ACT }}
       run: |
         echo "TAG=$(echo $TAG | sed -e 's/^v//')" >> $GITHUB_ENV
     - name: Set up Cloud SDK
