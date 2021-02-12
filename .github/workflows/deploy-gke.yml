@@ -45,7 +45,7 @@ jobs:
         TAG: ${{ github.event.inputs.tag }}
       with:
         resource-directory: ./kubernetes/overlays/production/
-        image: gcr.io/$PROJECT_ID/$IMAGE:$TAG
+        image: gcr.io/$PROJECT_ID/$IMAGE:${{ env.TAG }}/hi
         secrets-name: 'go-app'
         secrets: |
           test-secret=test
