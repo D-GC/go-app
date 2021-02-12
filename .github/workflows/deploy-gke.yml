@@ -46,7 +46,6 @@ jobs:
       with:
         resource-directory: ./kubernetes/overlays/production/
         images: gcr.io/${{ env.PROJECT_ID}}/${{env.IMAGE}}:${{env.TAG}}
-        #images: 'gcr.io/platform-production-299016/my-go-app:0.0.27'
         secrets-name: 'go-app'
         secrets: |
           test-secret=test
