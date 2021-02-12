@@ -38,6 +38,9 @@ jobs:
 #    # Get the GKE credentials so we can deploy to the cluster
 #    - run: |-
 #        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+    - name: GCR image
+      run: |
+        echo gcr.io/$PROJECT_ID/$IMAGE:$TAG
 
     - name: Configure and deploy
       uses: 'sendinblue/k8s-deploy-action@main'
