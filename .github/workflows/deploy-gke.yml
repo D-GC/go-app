@@ -41,11 +41,8 @@ jobs:
     - name: GCR image
       run: |
         echo gcr.io/$PROJECT_ID/$IMAGE:$TAG
-
     - name: Configure and deploy
       uses: 'sendinblue/k8s-deploy-action@main'
-      env:
-        TAG: ${{ github.event.inputs.tag }}
       with:
         resource-directory: ./kubernetes/overlays/production/
         image: gcr.io/$PROJECT_ID/$IMAGE:$TAG
