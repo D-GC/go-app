@@ -48,7 +48,7 @@ jobs:
         images: gcr.io/${{ env.PROJECT_ID}}/${{env.IMAGE}}:${{env.TAG}}
         secrets-name: 'go-app'
         secrets: |
-          test-secret=test
+          test-secret=${{ env.DEPLOYMENT_NAME }}
 
 #    # Deploy the Docker image to the GKE cluster
 #    - name: Deploy
