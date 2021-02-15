@@ -45,7 +45,9 @@ jobs:
       uses: 'sendinblue/k8s-deploy-action@main'
       with:
         resource-directory: ./kubernetes/overlays/production/
-        images: gcr.io/${{ env.PROJECT_ID}}/${{env.IMAGE}}:${{env.TAG}}
+        images: |
+          gcr.io/${{ env.PROJECT_ID}}/${{env.IMAGE}}:${{env.TAG}}
+          gcr.io/${{ env.PROJECT_ID}}/${{env.IMAGE}}:latest
         secrets-name: 'go-app'
         secrets: |
           test-secret=${{ env.DEPLOYMENT_NAME }}
