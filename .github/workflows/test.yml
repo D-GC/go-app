@@ -14,6 +14,8 @@ jobs:
     name: deploy images
     runs-on: ubuntu-latest
     steps:
+    - name: kustomize version
+      run: kustomize version
     - name: secret env test
       run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
     - name: Test
