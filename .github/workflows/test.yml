@@ -10,7 +10,7 @@ on:
 
 jobs:     
   deploy:
-    environment: hello
+    environment: Test
     name: deploy images
     runs-on: ubuntu-latest
     steps:
