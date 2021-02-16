@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: secret env test
-      run: echo ${{secrets.TEST2}}
+      run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
     - name: Test
       run: |
         if [[ -n "$IMAGES" ]]; then
