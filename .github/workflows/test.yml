@@ -8,13 +8,14 @@ env:
 on:
   workflow_dispatch:
 
-jobs:
+jobs:     
   deploy:
+    environment: Test
     name: deploy images
     runs-on: ubuntu-latest
     steps:
     - name: secret env test
-      run: echo ${{secrets.TEST}}
+      run: echo ${{secrets.TEST2}}
     - name: Test
       run: |
         if [[ -n "$IMAGES" ]]; then
