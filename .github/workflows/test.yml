@@ -29,11 +29,11 @@ jobs:
 #       run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
     - name: Set Prod Env
-      if: github.ref == 'refs/heads/main'
+      if: startsWith(github.ref, 'refs/tags/v')
       run: echo "ENV=production" >> $GITHUB_ENV
  
     - name: Set Staging Env
-      if: github.ref == 'refs/heads/dev'
+      if: github.ref == 'refs/heads/main'
       run: echo "ENV=staging" >> $GITHUB_ENV   
       
     - name: Set feature Env
