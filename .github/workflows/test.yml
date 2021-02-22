@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Print App Env from another job
-      run: echo "{{ needs.getenv.env.APP_ENV }} ENV"
+      run: echo " ${{ needs.getenv.env.APP_ENV }} ENV "
 #     - name: secret env test
 #       run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
 #     - name: Test
