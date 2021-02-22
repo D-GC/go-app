@@ -38,16 +38,11 @@ jobs:
     - id: step1
       run: echo "::set-output name=env::${{ env.APP_ENV }}"    
       
-    - name: set secret
-      #run: echo "::set-env name=DB_PASS::${{ secrets[format('{0}_DB_PASS', env.ENV)] }}"
-   #   run: echo "DB_PASS=${{ secrets[format('{0}_DB_PASS', env.ENV)] }}" >> $GITHUB_ENV
-    #- run: echo "$DB_PASS - $ENV"
-      run: echo "format('{0}_DB_PASS', '${{env.APP_ENV}}')"
-#    - run: echo "DB_PASS=${{ secrets[format('{0}_DB_PASS', env.APP_ENV)] }}" >> $GITHUB_ENV 
-    - name: print DB_PASS
+    - name: print $DB_PASS
       env:
         DB_PASS: ${{ secrets[format('{0}_DB_PASS', env.APP_ENV)] }}
-      run: echo $DB_PASS
+      if: $DB_PASS == "production-db-pass"
+      run: echo "production-db-pass"
    
 #   deploy:
 #     needs: getenv
