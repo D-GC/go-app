@@ -40,12 +40,12 @@ jobs:
     
   deploy:
     needs: getenv
-    environment: Test
+    environment: ${{ needs.getenv.outputs.output1 }}
     name: deploy images
     runs-on: ubuntu-latest
     steps:
     - name: Print App Env from another job
-      run: echo " ${{ needs.getenv.outputs.output1 }} ENV "
+      run: echo " ${{ needs.getenv.outputs.output1 }} ENV ${{ secrets.NAME }}" 
 #     - name: secret env test
 #       run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
 #     - name: Test
