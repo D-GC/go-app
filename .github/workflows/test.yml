@@ -40,18 +40,18 @@ jobs:
 
     - name: set secret
       #run: echo "::set-env name=DB_PASS::${{ secrets[format('{0}_DB_PASS', env.ENV)] }}"
-      run: echo "DB_PASS=${{ secrets[format('{0}_DB_PASS', env.ENV)] }}" >> $GITHUB_ENV
-    - run: echo "$DB_PASS - $ENV"
-    - run: echo "format('{0}_DB_PASS', env.ENV)"
+   #   run: echo "DB_PASS=${{ secrets[format('{0}_DB_PASS', env.ENV)] }}" >> $GITHUB_ENV
+    #- run: echo "$DB_PASS - $ENV"
+    - run: echo "format('{0}_DB_PASS', env.ENV) hi"
 
-  deploy:
-    needs: getenv
-    environment:  doesntwork #${{ needs.getenv.outputs.output1 }}
-    name: deploy images
-    runs-on: ubuntu-latest
-    steps:
-    - name: Print App Env from another job
-      run: echo " ${{ needs.getenv.outputs.output1 }} ENV ${{ secrets.NAME }}" 
+#   deploy:
+#     needs: getenv
+#     environment:  doesntwork #${{ needs.getenv.outputs.output1 }}
+#     name: deploy images
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Print App Env from another job
+#       run: echo " ${{ needs.getenv.outputs.output1 }} ENV ${{ secrets.NAME }}" 
 #     - name: secret env test
 #       run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
 #     - name: Test
