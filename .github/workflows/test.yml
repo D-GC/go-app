@@ -33,11 +33,12 @@ jobs:
     - name: Set feature Env
       if: startsWith(github.ref, 'refs/heads/feature') || startsWith(github.ref, 'refs/heads/hotfix') 
       run: echo "APP_ENV=DEV" >> $GITHUB_ENV 
+      
     - name: print APP_ENV
       run: echo ${{ env.APP_ENV }}
     - id: step1
       run: echo "::set-output name=env::${{ env.APP_ENV }}"    
-      
+    - run: echo ${{ env.APP_ENV }}  
     - name: print $DB_PASS
       env:
         DB_PASS: ${{ secrets[format('{0}_DB_PASS', env.APP_ENV)] }}
