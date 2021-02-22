@@ -1,12 +1,4 @@
-name: Test
-
-env:
-  IMAGES: |
-    abc
-    def
-    hig
-    feature_dev_branch
- 
+name: Test 
 on:
   workflow_dispatch:
   push:
@@ -43,16 +35,17 @@ jobs:
       run: echo ${{ env.APP_ENV }}
     
   deploy:
+    needs: getenv
     environment: Test
     name: deploy images
     runs-on: ubuntu-latest
     steps:
-    - name: kustomize version
-      run: kustomize version
-    - name: secret env test
-      run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
-    - name: Test
-      run: |
-        if [[ -n "$IMAGES" ]]; then
-          echo "Setting image: $IMAGES"
-        fi
+    - name: Print App Env from another job
+      run: echo "{{ needs.getenv.env.APP_ENV }} ENV"
+#     - name: secret env test
+#       run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
+#     - name: Test
+#       run: |
+#         if [[ -n "$IMAGES" ]]; then
+#           echo "Setting image: $IMAGES"
+#         fi
