@@ -16,26 +16,26 @@ jobs:
   getenv:
     runs-on: ubuntu-latest
     steps:
-    - name: Get branch name (merge)
-      if: github.event_name != 'pull_request'
-      shell: bash
-      run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+#     - name: Get branch name (merge)
+#       if: github.event_name != 'pull_request'
+#       shell: bash
+#       run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
 
-    - name: Get branch name (pull request)
-      if: github.event_name == 'pull_request'
-      shell: bash
-      run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
+#     - name: Get branch name (pull request)
+#       if: github.event_name == 'pull_request'
+#       shell: bash
+#       run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
     - name: Set Prod Env
-      if: ${{ env.BRANCH_NAME }} == 'main'
+      if: github.ref == 'refs/heads/main'
       run: echo "ENV=production" >> $GITHUB_ENV
  
     - name: Set Staging Env
-      if: ${{ env.BRANCH_NAME }} == 'dev'
+      if: github.ref == 'refs/heads/dev'
       run: echo "ENV=staging" >> $GITHUB_ENV   
       
     - name: Set feature Env
-      if: startsWith(${{ env.BRANCH_NAME }}, 'feature') || startsWith(${{ env.BRANCH_NAME }}, 'hotfix') 
+      if: startsWith(github.ref, 'feature') || startsWith(github.ref, 'hotfix') 
       run: echo "ENV=feature" >> $GITHUB_ENV 
     - name: print ENV
       run: echo " ${{ env.ENV }} ${{ env.BRANCH_NAME }} "
