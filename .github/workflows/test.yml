@@ -40,8 +40,8 @@ jobs:
 
     - name: set secret
       #run: echo "::set-env name=DB_PASS::${{ secrets[format('{0}_DB_PASS', env.ENV)] }}"
-      run: echo "DB_PASS=$(echo ${{ secrets[format('{0}_DB_PASS', env.ENV)] }})" >> $GITHUB_ENV
-    - run: echo $DB_PASS
+      run: echo "DB_PASS=${{ secrets[format('{0}_DB_PASS', env.ENV)] }}" >> $GITHUB_ENV
+    - run: echo "$DB_PASS - $ENV"
 
     
   deploy:
