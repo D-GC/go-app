@@ -5,13 +5,15 @@ env:
     abc
     def
     hig
-    feature_branch
+    feature_test
  
 on:
   workflow_dispatch:
   push:
     branches:
       - main
+      - dev
+      - feature/*
 jobs:    
   getenv:
     runs-on: ubuntu-latest
