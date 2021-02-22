@@ -37,13 +37,15 @@ jobs:
     - name: print APP_ENV
       run: echo ${{ env.APP_ENV }}
     - id: step1
-      run: echo "::set-output name=env::${{ env.APP_ENV }}"    
+      run: echo "::set-output name=env::${{ env.APP_ENV }}"
+    - id: step2
+      run: echo "::set-output name=db_pass::${{ secrets[format('{0}_DB_PASS', env.APP_ENV)] }}"
     - run: echo ${{ env.APP_ENV }}  
     - name: print $DB_PASS
       env:
         DB_PASS: ${{ secrets[format('{0}_DB_PASS', env.APP_ENV)] }}
-      if: ${{ steps.step1.outputs.env == 'staging-db-pass'}}
-      run: echo "production-db-pass"
+      if: steps.step2.outputs.db_pass == 'staging-db-pass'
+      run: echo "staging-db-pass"
    
 #   deploy:
 #     needs: getenv
