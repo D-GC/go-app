@@ -42,7 +42,7 @@ jobs:
       #run: echo "::set-env name=DB_PASS::${{ secrets[format('{0}_DB_PASS', env.ENV)] }}"
    #   run: echo "DB_PASS=${{ secrets[format('{0}_DB_PASS', env.ENV)] }}" >> $GITHUB_ENV
     #- run: echo "$DB_PASS - $ENV"
-      run: echo format('{0}_DB_PASS', ${{env.APP_ENV}})
+      run: echo format('{0}_DB_PASS', '${{env.APP_ENV}}')
 #   deploy:
 #     needs: getenv
 #     environment:  doesntwork #${{ needs.getenv.outputs.output1 }}
