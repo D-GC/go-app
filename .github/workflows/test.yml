@@ -41,7 +41,7 @@ jobs:
     - name: print $DB_PASS
       env:
         DB_PASS: ${{ secrets[format('{0}_DB_PASS', env.APP_ENV)] }}
-      if: ${{ env.DB_PASS == "production-db-pass"}}
+      if: ${{ steps.step1.outputs.env == 'production-db-pass'}}
       run: echo "production-db-pass"
    
 #   deploy:
