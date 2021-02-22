@@ -8,6 +8,8 @@ on:
       - feature/*
 jobs:    
   getenv:
+    outputs:
+      output1: ${{ steps.step1.outputs.env }}
     runs-on: ubuntu-latest
     steps:
 #     - name: Get branch name (merge)
@@ -33,6 +35,8 @@ jobs:
       run: echo "APP_ENV=feature" >> $GITHUB_ENV 
     - name: print APP_ENV
       run: echo ${{ env.APP_ENV }}
+    - id: step1
+      run: echo "::set-output name=env::${{ env.APP_ENV }}"  
     
   deploy:
     needs: getenv
@@ -41,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Print App Env from another job
-      run: echo " ${{ needs.getenv.env.APP_ENV }} ENV "
+      run: echo " ${{ needs.getenv.outputs.output1} }} ENV "
 #     - name: secret env test
 #       run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
 #     - name: Test
