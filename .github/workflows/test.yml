@@ -26,8 +26,20 @@ jobs:
       shell: bash
       run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
-    - name: Debug
-      run: echo "${{ env.BRANCH_NAME }} branch"
+    - name: Set Prod Env
+      if: ${{ env.BRANCH_NAME }} == 'main'
+      run: echo "ENV=production" >> $GITHUB_ENV
+ 
+    - name: Set Staging Env
+      if: ${{ env.BRANCH_NAME }} == 'dev'
+      run: echo "ENV=staging" >> $GITHUB_ENV   
+      
+    - name: Set feature Env
+      if: startsWith(${{ env.BRANCH_NAME }}, 'feature') || startsWith(${{ env.BRANCH_NAME }}, 'hotfix') 
+      run: echo "ENV=feature" >> $GITHUB_ENV 
+    - name: print ENV
+       echo ${{ env.ENV }}
+    
   deploy:
     environment: Test
     name: deploy images
