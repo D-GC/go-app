@@ -5,7 +5,7 @@ env:
     abc
     def
     hig
-    feature_test
+    feature_dev_branch
  
 on:
   workflow_dispatch:
@@ -37,7 +37,7 @@ jobs:
       run: echo "ENV=staging" >> $GITHUB_ENV   
       
     - name: Set feature Env
-      if: startsWith(github.ref, 'feature') || startsWith(github.ref, 'hotfix') 
+      if: startsWith(github.ref, 'refs/heads/feature') || startsWith(github.ref, 'refs/heads/hotfix') 
       run: echo "ENV=feature" >> $GITHUB_ENV 
     - name: print ENV
       run: echo " ${{ env.ENV }} ${{ env.BRANCH_NAME }} "
