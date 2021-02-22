@@ -12,6 +12,8 @@ on:
   push:
     branches:
       - main
+      - dev
+      - feature/*
 jobs:    
   getenv:
     runs-on: ubuntu-latest
