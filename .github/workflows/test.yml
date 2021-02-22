@@ -38,7 +38,7 @@ jobs:
       if: startsWith(${{ env.BRANCH_NAME }}, 'feature') || startsWith(${{ env.BRANCH_NAME }}, 'hotfix') 
       run: echo "ENV=feature" >> $GITHUB_ENV 
     - name: print ENV
-       echo ${{ env.ENV }}
+      run: echo ${{ env.ENV }}
     
   deploy:
     environment: Test
