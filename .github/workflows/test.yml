@@ -30,17 +30,17 @@ jobs:
 
     - name: Set Prod Env
       if: startsWith(github.ref, 'refs/tags/v')
-      run: echo "ENV=production" >> $GITHUB_ENV
+      run: echo "APP_ENV=production" >> $GITHUB_ENV
  
     - name: Set Staging Env
       if: github.ref == 'refs/heads/main'
-      run: echo "ENV=staging" >> $GITHUB_ENV   
+      run: echo "APP_ENV=staging" >> $GITHUB_ENV   
       
     - name: Set feature Env
       if: startsWith(github.ref, 'refs/heads/feature') || startsWith(github.ref, 'refs/heads/hotfix') 
-      run: echo "ENV=feature" >> $GITHUB_ENV 
-    - name: print ENV
-      run: echo " ${{ env.ENV }} ${{ env.BRANCH_NAME }} "
+      run: echo "APP_ENV=feature" >> $GITHUB_ENV 
+    - name: print APP_ENV
+      run: echo ${{ env.APP_ENV }}
     
   deploy:
     environment: Test
