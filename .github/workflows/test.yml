@@ -8,8 +8,8 @@ on:
       - feature/*
 jobs:    
   getenv:
-    outputs:
-      output1: ${{ steps.step1.outputs.env }}
+#     outputs:
+#       output1: ${{ steps.step1.outputs.env }}
     runs-on: ubuntu-latest
     steps:
 #     - name: Get branch name (merge)
@@ -24,29 +24,24 @@ jobs:
         
     - name: Set Prod Env
       if: startsWith(github.ref, 'refs/tags/v')
-      run: echo "APP_ENV=PROD" >> $GITHUB_ENV
+      run: echo "APP_ENV=production" >> $GITHUB_ENV
  
     - name: Set Staging Env
       if: github.ref == 'refs/heads/main'
-      run: echo "APP_ENV=STG" >> $GITHUB_ENV   
+      run: echo "APP_ENV=staging" >> $GITHUB_ENV   
 
     - name: Set feature Env
       if: startsWith(github.ref, 'refs/heads/feature') || startsWith(github.ref, 'refs/heads/hotfix') 
-      run: echo "APP_ENV=DEV" >> $GITHUB_ENV 
-      
-    - name: print APP_ENV
-      run: echo ${{ env.APP_ENV }}
-    - id: step1
+      run: echo "APP_ENV=feature" >> $GITHUB_ENV 
+
+    - id: getenv
       run: echo "::set-output name=env::${{ env.APP_ENV }}"
-    - id: step2
-      run: echo "::set-output name=db_pass::${{ secrets[format('{0}_DB_PASS', env.APP_ENV)] }}"
-    - run: echo ${{ env.APP_ENV }}  
-    - run: echo ${{steps.step2.outputs.db_pass}}
-    - name: print $DB_PASS
-      if: steps.step2.outputs.db_pass == 'staging-db-pass'
-      env:
-        DB_PASS: ${{ secrets[format('{0}_DB_PASS', env.APP_ENV)] }}
-      run: echo "staging-db-pass"
+      
+#     - name: print $DB_PASS
+#       if: steps.step2.outputs.db_pass == 'staging-db-pass'
+#       env:
+#         DB_PASS: ${{ secrets[format('{0}_DB_PASS', env.APP_ENV)] }}
+#       run: echo "staging-db-pass"
    
   deploy:
     needs: getenv
