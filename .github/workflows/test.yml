@@ -21,7 +21,7 @@ jobs:
 #       if: github.event_name == 'pull_request'
 #       shell: bash
 #       run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
-
+        
     - name: Set Prod Env
       if: startsWith(github.ref, 'refs/tags/v')
       run: echo "APP_ENV=PROD" >> $GITHUB_ENV
@@ -29,7 +29,7 @@ jobs:
     - name: Set Staging Env
       if: github.ref == 'refs/heads/main'
       run: echo "APP_ENV=STG" >> $GITHUB_ENV   
-      
+
     - name: Set feature Env
       if: startsWith(github.ref, 'refs/heads/feature') || startsWith(github.ref, 'refs/heads/hotfix') 
       run: echo "APP_ENV=DEV" >> $GITHUB_ENV 
@@ -43,19 +43,21 @@ jobs:
     - run: echo ${{ env.APP_ENV }}  
     - run: echo ${{steps.step2.outputs.db_pass}}
     - name: print $DB_PASS
-      if: steps.step2.outputs.db_pass == '1staging-db-pass'
+      if: steps.step2.outputs.db_pass == 'staging-db-pass'
       env:
         DB_PASS: ${{ secrets[format('{0}_DB_PASS', env.APP_ENV)] }}
       run: echo "staging-db-pass"
    
-#   deploy:
-#     needs: getenv
-#     environment:  doesntwork #${{ needs.getenv.outputs.output1 }}
-#     name: deploy images
-#     runs-on: ubuntu-latest
-#     steps:
-#     - name: Print App Env from another job
-#       run: echo " ${{ needs.getenv.outputs.output1 }} ENV ${{ secrets.NAME }}" 
+  deploy:
+    needs: getenv
+    env:
+      APP_ENV: ${{ needs.getenv.outputs.output1 }}
+    environment: ${{ env.APP_ENV }}
+    name: deploy images
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print App Env from another job
+      run: echo " ${{ needs.getenv.outputs.output1 }} ENV ${{ secrets.NAME }}" 
 #     - name: secret env test
 #       run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
 #     - name: Test
