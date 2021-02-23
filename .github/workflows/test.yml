@@ -1,11 +1,11 @@
 name: Test 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - dev
-      - feature/*
+#   push:
+#     branches:
+#       - main
+#       - dev
+#       - feature/*
 jobs:    
   getenv:
 #     outputs:
