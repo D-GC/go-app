@@ -1,13 +1,18 @@
 name: Job Enviroment Test 
 on:
   workflow_dispatch:
-env:
-  JOB_ENV: 'production'
 jobs:
-  deploy:
+  set_environment:
+    outputs:
+      env: ${{ steps.setenv.outputs.env }}
+    runs-on: ubuntu-latest
+    steps:
+    - id: setenv
+      run: echo "::set-output name=env::production"
+    
+  use_outputs_environemnt:
     environment: 
-      name: ${{ JOB_ENV }}
-    name: deploy images
+      name: ${{ needs.set_environment.outputs.env }}
     runs-on: ubuntu-latest
     steps:
     - name: Testing job environment
