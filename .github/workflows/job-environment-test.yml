@@ -10,15 +10,15 @@ jobs:
     - id: setenv
       run: echo "::set-output name=env::production"
     
-  use_outputs_environemnt_with_object_syntax:
-    needs: set_environment
-    environment: 
-      name: ${{ needs.set_environment.outputs.env }}
-    runs-on: ubuntu-latest
-    steps:
-    - name: Testing job environment
-      run: echo ${{ secrets.NAME }} | sed 's/./& /g'
-  
+#   use_outputs_environemnt_with_object_syntax:
+#     needs: set_environment
+#     environment: 
+#       name: ${{ needs.set_environment.outputs.env }}
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Testing job environment
+#       run: echo ${{ secrets.NAME }} | sed 's/./& /g'
+  # this doesn't work I get syntax   
   use_outputs_environemnt_directly:    
     needs: set_environment
     environment: "${{ needs.set_environment.outputs.env }}"
