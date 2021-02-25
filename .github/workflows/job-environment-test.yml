@@ -18,14 +18,14 @@ jobs:
     steps:
     - name: Testing job environment
       run: echo ${{ secrets.NAME }} | sed 's/./& /g'
-  # The below throws this error:
-  # The workflow is not valid. .github/workflows/job-environment-test.yml (Line: 25, Col: 18): Unrecognized named-value: 'needs'. Located at position 1 within expression: needs.set_environment.outputs.env
-  use_outputs_environemnt_directly:    
-    needs: set_environment
-    environment: "${{ needs.set_environment.outputs.env }}"
-    runs-on: ubuntu-latest
-    steps:
-    - name: Testing job environment
-      run: echo ${{ secrets.NAME }} | sed 's/./& /g'
+#   # The below throws this error:
+#   # The workflow is not valid. .github/workflows/job-environment-test.yml (Line: 25, Col: 18): Unrecognized named-value: 'needs'. Located at position 1 within expression: needs.set_environment.outputs.env
+#   use_outputs_environemnt_directly:    
+#     needs: set_environment
+#     environment: "${{ needs.set_environment.outputs.env }}"
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Testing job environment
+#       run: echo ${{ secrets.NAME }} | sed 's/./& /g'
   
         
