@@ -11,6 +11,7 @@ jobs:
       run: echo "::set-output name=env::production"
     
   use_outputs_environemnt:
+    needs: set_environment
     environment: 
       name: ${{ needs.set_environment.outputs.env }}
     runs-on: ubuntu-latest
