@@ -5,7 +5,8 @@ env:
   JOB_ENV: 'production'
 jobs:
   deploy:
-    environment: ${{env.JOB_ENV}}
+    environment: 
+      name: (${{env.JOB_ENV}})
     name: deploy images
     runs-on: ubuntu-latest
     steps:
