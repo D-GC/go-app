@@ -21,7 +21,7 @@ jobs:
   
   use_outputs_environemnt_directly:    
     needs: set_environment
-    environment: ${{ needs.set_environment.outputs.env }}
+    environment: "${{ needs.set_environment.outputs.env }}"
     runs-on: ubuntu-latest
     steps:
     - name: Testing job environment
