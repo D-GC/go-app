@@ -1,4 +1,4 @@
-name: Job Enviroment Test 
+name: Job Enviroment Test KO
 on:
   workflow_dispatch:
 jobs:
