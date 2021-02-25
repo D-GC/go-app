@@ -6,7 +6,7 @@ env:
 jobs:
   deploy:
     environment: 
-      name: (${{env.JOB_ENV}})
+      name: ${{ JOB_ENV }}
     name: deploy images
     runs-on: ubuntu-latest
     steps:
