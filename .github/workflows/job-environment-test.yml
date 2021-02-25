@@ -1,11 +1,11 @@
-name: Workflow Enviroment Test 
+name: Job Enviroment Test 
 on:
   workflow_dispatch:
 env:
-  WORKFLOW_ENV: 'production'
+  JOB_ENV: 'production'
 jobs:
   deploy:
-    environment: ${{ env.WORKFLOW_ENV }}
+    environment: ${{ env.JOB_ENV }}
     name: deploy images
     runs-on: ubuntu-latest
     steps:
