@@ -11,5 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Testing job environment
-      run: echo ${{ env.NAME }} | sed 's/./& /g'
+      run: echo ${{ secrets.NAME }} | sed 's/./& /g'
         
