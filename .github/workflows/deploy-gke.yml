@@ -11,8 +11,12 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Tag to deploy
+        description: Tag, Branch to deploy
         required: true
+      environment:
+        default: prodution
+        description: prodution, staging, dev 
+        required: true  
 jobs:
   deploy:
     name: deploy images
