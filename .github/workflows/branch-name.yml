@@ -27,3 +27,12 @@ jobs:
         if [[ "${REF_NAME}" == "main" || "${REF_NAME}" == "master" ]]; then TAG=latest; fi
         echo "REF_NAME=$REF_NAME"
         echo "TAG=$TAG"
+    - name: Dump github context
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+      
+      
+      
+      
+      
