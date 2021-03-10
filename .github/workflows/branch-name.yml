@@ -3,6 +3,16 @@ on:
   push:
 
 jobs:
+  branchtest:
+    name: branch name test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Branch name test
+      run: |
+        REF_NAME=$(echo ${GITHUB_REF#refs/*/} | sed -e 's/^v//')
+        echo "TAG=$(printf ${REF_NAME} | tr -c '[[:alnum:]]._-' '_')" >> $GITHUB_ENV
+    - name: print Tag 
+      run: echo $TAG
   branchname:
     name: get branch name
     runs-on: ubuntu-latest
