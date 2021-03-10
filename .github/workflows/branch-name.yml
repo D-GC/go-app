@@ -8,9 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Branch name test
-      run: |
+      run: 
         REF_NAME=$(echo ${GITHUB_REF#refs/*/} | sed -e 's/^v//')
-        echo "TAG=$(printf ${REF_NAME} | tr -c '[[:alnum:]]._-' '_')" >> $GITHUB_ENV
+        TAG=$(printf ${REF_NAME} | tr -c '[[:alnum:]]._-' '_')
+        if [[ "${REF_NAME}" == "main" || "${REF_NAME}" == "master" ]]; then TAG=latest; fi
+        echo "TAG=$TAG" >> $GITHUB_ENV
     - name: print Tag 
       run: echo $TAG
   branchname:
