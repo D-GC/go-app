@@ -1,4 +1,4 @@
-name: SED 
+name: SED - FIND & REPLACE
 on:
   push:
     branches:
@@ -12,6 +12,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - run: |
+        echo ${GITHUB_REF#refs/*/}
         sed -i 's/{USER}/${{env.USER}}/g' kubernetes/overlays/staging/ingress_patch.json
         cat kubernetes/overlays/staging/ingress_patch.json
       env:
