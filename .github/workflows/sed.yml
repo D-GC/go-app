@@ -13,7 +13,9 @@ jobs:
       uses: actions/checkout@v2
     - run: |
         HOST=$( echo ${GITHUB_REF#refs/*/*/} | cut -d- -f1 )
+        HOST="s/{USER}/$HOST/g"
         echo $HOST
         sed -i 's/{USER}/${HOST}/g' kubernetes/overlays/staging/ingress_patch.json
         cat kubernetes/overlays/staging/ingress_patch.json
+       
         
