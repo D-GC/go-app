@@ -1,0 +1,17 @@
+name: Get Branch Name
+on:
+  push:
+
+jobs:
+  branchtest:
+    name: jq test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - run: |
+      sed -i 's/{USER}/${{env.USER}}/g' kubernetes/overlays/dev/ingress_patch.json
+      cat kubernetes/overlays/dev/ingress_patch.json
+      env:
+        USER: ${{ github.actor }}
+        
