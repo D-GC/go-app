@@ -1,6 +1,8 @@
 name: SED 
 on:
   push:
+    branches:
+      - domain/*
 
 jobs:
   branchtest:
