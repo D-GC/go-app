@@ -1,0 +1,12 @@
+[
+  {
+    "op": "replace",
+    "path": "/spec/rules/0/host",
+    "value": "{USER}-app.com"
+  },
+  {
+    "op": "replace",
+    "path": "/spec/rules/1/host",
+    "value": "{USER}-dpe-insights-extractor-dev.51b.tech"
+  }
+]
