@@ -10,8 +10,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - run: |
-        sed -i 's/{USER}/${{env.USER}}/g' kubernetes/overlays/dev/ingress_patch.json
-        cat kubernetes/overlays/dev/ingress_patch.json
+        sed -i 's/{USER}/${{env.USER}}/g' kubernetes/overlays/staging/ingress_patch.json
+        cat kubernetes/overlays/staging/ingress_patch.json
       env:
         USER: ${{ github.actor }}
         
