@@ -12,7 +12,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - run: |
-        echo "HOST=${GITHUB_REF#refs/*/*/} | cut -d- -f1" >> $GITHUB_ENV
-        sed -i 's/{USER}/${{HOST}}/g' kubernetes/overlays/staging/ingress_patch.json
+        HOST=${GITHUB_REF#refs/*/*/} | cut -d- -f1
+        sed -i 's/{USER}/$HOST/g' kubernetes/overlays/staging/ingress_patch.json
         cat kubernetes/overlays/staging/ingress_patch.json
         
