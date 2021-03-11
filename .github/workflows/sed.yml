@@ -6,7 +6,7 @@ on:
 
 jobs:
   branchtest:
-    name: jq test
+    name: sed command test to replace text in file
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
