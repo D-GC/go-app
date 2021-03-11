@@ -2,11 +2,11 @@
   {
     "op": "replace",
     "path": "/spec/rules/0/host",
-    "value": "{HOSTNAME}"
+    "value": "{USER}-app-dev.test.com"
   },
   {
     "op": "replace",
     "path": "/spec/rules/1/host",
-    "value": "{HOSTNAME}"
+    "value": "{USER}-app-backend-dev.test.com"
   }
 ]
