@@ -3,7 +3,7 @@ name: Build and push image to google container registry for go app
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   IMAGE: "my-go-app/app"
-  TAG: ${{ github.event.release.tag_name }} #"latest"
+#  TAG: ${{ github.event.release.tag_name }} #"latest"
 on:
   push:
     branches:
@@ -56,7 +56,12 @@ jobs:
 
     - name: Set Tag
       run: |
+        echo ${GITHUB_REF#refs/*/} 
         REF_NAME=$(echo ${GITHUB_REF#refs/*/} | sed -e 's/^v//')
         TAG=$(printf ${REF_NAME} | tr -c '[[:alnum:]]._-' '_')
         if [[ "${REF_NAME}" == "main" || "${REF_NAME}" == "master" ]]; then TAG=latest; fi
         echo "TAG=$TAG" >> $GITHUB_ENV
+
+
+
+
