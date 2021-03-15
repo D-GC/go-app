@@ -17,7 +17,7 @@ jobs:
 
   pick-environment:
     name: Pick environment for deployment
-    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v')
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
     needs: ['job1-test']
     outputs:
       env-name: ${{ steps.setenv.outputs.env-name }}
@@ -25,7 +25,7 @@ jobs:
     steps:
       - if: startsWith(github.ref, 'refs/tags/v')
         run: echo "APP_ENV=staging" >> $GITHUB_ENV
-      - if: github.ref == 'refs/heads/master'
+      - if: github.ref == 'refs/heads/main'
         run: echo "APP_ENV=dev" >> $GITHUB_ENV
       - id: setenv
         run: echo "::set-output name=env-name::${{ env.APP_ENV }}"
