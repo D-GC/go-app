@@ -58,7 +58,9 @@ jobs:
       run: |
         echo ${GITHUB_REF#refs/*/} 
         REF_NAME=$(echo ${GITHUB_REF#refs/*/} | sed -e 's/^v//')
+        echo "Ref name: $REF_NAME"
         TAG=$(printf ${REF_NAME} | tr -c '[[:alnum:]]._-' '_')
+        echo "TAG: $TAG - ${{ TAG }}"
         if [[ "${REF_NAME}" == "main" || "${REF_NAME}" == "master" ]]; then TAG=latest; fi
         echo "TAG=$TAG" >> $GITHUB_ENV
 
