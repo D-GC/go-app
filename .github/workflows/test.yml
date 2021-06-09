@@ -58,8 +58,7 @@ jobs:
         TAG_GRAFANA="latest"
         if [[ "${{ env.APP_ENV }}"=="staging" ]];
         then
-          TAG_APP=${{ needs.getenv.outputs.output1 }};
-          TAG_GRAFANA=$TAG_APP;
+          TAG_APP=TAG_GRAFANA=${{ needs.getenv.outputs.output1 }};
         fi  
         echo "TAG_APP=$TAG_APP" >> $GITHUB_ENV
         echo "TAG_GRAFANA=$TAG_GRAFANA" >> $GITHUB_ENV
