@@ -54,11 +54,10 @@ jobs:
     - name: Print App Env from another job
       run: | 
         echo " ${{ env.APP_ENV }}  - ${{ needs.getenv.outputs.output1 }}" 
-        echo ${{ needs.getenv.outputs.output1 }}
         TAG_APP=${{ needs.getenv.outputs.output1 }}
         echo "TAG_APP=$TAG_APP" >> $GITHUB_ENV
-#     - name: secret env test
-#       run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
+    - name: echo TAG APP
+      run: echo $TAG_APP
 #     - name: Test
 #       run: |
 #         if [[ -n "$IMAGES" ]]; then
