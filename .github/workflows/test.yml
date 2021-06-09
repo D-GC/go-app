@@ -54,12 +54,13 @@ jobs:
     - name: Print App Env from another job
       run: | 
         echo " ${{ env.APP_ENV }}  - ${{ needs.getenv.outputs.output1 }}" 
-        TAG_APP="latest"
-        TAG_GRAFANA="latest"
+        REF_NAME=$(echo ${GITHUB_REF#refs/*/} | sed -e 's/^v//')
+        TAG_APP=:$(printf ${REF_NAME} | tr -c '[[:alnum:]]._-' '_')
+        TAG_GRAFANA=$TAG_APP
         if [[ "${{ env.APP_ENV }}"=="staging" ]];
         then
-          TAG_APP=${{ needs.getenv.outputs.output1 }};
-          TAG_GRAFANA = TAG_APP;
+          TAG_APP=@${{ needs.getenv.outputs.output1 }};
+          TAG_GRAFANA=@${{ needs.getenv.outputs.output1 }};
         fi  
         echo "TAG_APP=$TAG_APP" >> $GITHUB_ENV
         echo "TAG_GRAFANA=$TAG_GRAFANA" >> $GITHUB_ENV
