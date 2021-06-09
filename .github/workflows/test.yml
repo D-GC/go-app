@@ -54,10 +54,20 @@ jobs:
     - name: Print App Env from another job
       run: | 
         echo " ${{ env.APP_ENV }}  - ${{ needs.getenv.outputs.output1 }}" 
-        TAG_APP=${{ needs.getenv.outputs.output1 }}
+        TAG_APP="latest"
+        TAG_GRAFANA="latest"
+        if [[ "${{ env.APP_ENV }}"=="staging" ]];
+        then
+          TAG_APP=${{ needs.getenv.outputs.output1 }};
+          TAG_GRAFANA=TAG_APP;
+        fi  
         echo "TAG_APP=$TAG_APP" >> $GITHUB_ENV
+        echo "TAG_GRAFANA=$TAG_GRAFANA" >> $GITHUB_ENV
     - name: echo TAG APP
-      run: echo $TAG_APP
+      run: |
+        echo $TAG_APP
+        echo $TAG_GRAFANA
+      
 #     - name: Test
 #       run: |
 #         if [[ -n "$IMAGES" ]]; then
