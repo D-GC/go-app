@@ -1,4 +1,4 @@
-name: Test 
+name: Test Script
 on:
   workflow_dispatch:
 #   push:
@@ -8,8 +8,8 @@ on:
 #       - feature/*
 jobs:    
   getenv:
-#     outputs:
-#       output1: ${{ steps.step1.outputs.env }}
+    outputs:
+       output1: ${{ steps.step1.outputs.env }}
     runs-on: ubuntu-latest
     steps:
 #     - name: Get branch name (merge)
@@ -52,7 +52,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Print App Env from another job
-      run: echo " ${{ env.APP_ENV }}  - ${{ needs.getenv.outputs.output1 }}" 
+      run: | 
+        echo " ${{ env.APP_ENV }}  - ${{ needs.getenv.outputs.output1 }}" 
+        TAG_APP=${{ needs.getenv.outputs.output1 }}
+        echo "TAG_APP=$TAG_APP" >> $GITHUB_ENV
 #     - name: secret env test
 #       run: echo ${{ secrets.STAGING_D_GC_DOCKER_HUB_ACCESS_TOKEN }}
 #     - name: Test
