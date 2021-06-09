@@ -9,7 +9,7 @@ on:
 jobs:    
   getenv:
     outputs:
-       output1: ${{ steps.step1.outputs.env }}
+       output1: ${{ steps.getenv.outputs.env }}
     runs-on: ubuntu-latest
     steps:
 #     - name: Get branch name (merge)
@@ -54,6 +54,7 @@ jobs:
     - name: Print App Env from another job
       run: | 
         echo " ${{ env.APP_ENV }}  - ${{ needs.getenv.outputs.output1 }}" 
+        echo ${{ needs.getenv.outputs.output1 }}
         TAG_APP=${{ needs.getenv.outputs.output1 }}
         echo "TAG_APP=$TAG_APP" >> $GITHUB_ENV
 #     - name: secret env test
