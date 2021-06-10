@@ -1,4 +1,4 @@
-name: Commit push test simple
+name: Commit push test on tags 
 on:
   push:
     - 'v[0-9]+.[0-9]+.[0-9]+'
