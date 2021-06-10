@@ -1,4 +1,4 @@
-name: Commit push test on tags 
+name: Commit push tags 
 on:
   push:
     branches:
