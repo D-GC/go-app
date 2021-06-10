@@ -1,0 +1,21 @@
+name: Commit push test simple
+on:
+  push:
+    - 'v[0-9]+.[0-9]+.[0-9]+'
+    - 'v[0-9]+.[0-9]+.[0-9]+\-*'
+jobs:    
+  commit-push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Update and push
+      run: |
+        git config --local user.email "$(git log --format='%ae' HEAD^!)"
+        git config --local user.name "$(git log --format='%an' HEAD^!)"
+        git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
+        git pull github ${GITHUB_REF} --ff-only
+        date > index.html
+        git commit -m "Committed from Github Actions" index.html
+        git push github HEAD:${GITHUB_REF}
+        
