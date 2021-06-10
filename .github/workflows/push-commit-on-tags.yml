@@ -1,8 +1,9 @@
 name: Commit push test on tags 
 on:
   push:
-    - 'v[0-9]+.[0-9]+.[0-9]+'
-    - 'v[0-9]+.[0-9]+.[0-9]+\-*'
+    branches:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+\-*'
 jobs:    
   commit-push:
     runs-on: ubuntu-latest
