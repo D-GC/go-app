@@ -1,0 +1,19 @@
+name: Commit push tags 
+#
+on:
+  push:
+    branches:
+      - main
+jobs:    
+  commit-push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: ESLINT test
+      run: |
+        eslint -h
+        
+        
+        
+        
