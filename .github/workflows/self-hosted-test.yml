@@ -1,0 +1,14 @@
+name: Testing self hoster runner
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag, Branch to deploy
+        required: false
+jobs:
+  deploy:
+    name: Test
+    runs-on: self-hosted
+    steps:
+    - name: Checkout
+      run: echo "HI"
